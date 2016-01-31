@@ -1,4 +1,7 @@
-package com.limaz.service;
+package com.limaz.business.service;
+
+import com.limaz.business.provider.IDataStoreProvider;
+import com.limaz.business.provider.ILoggingProvider;
 
 public class BusinessService {
 	private IDataStoreProvider dataStoreProvider;

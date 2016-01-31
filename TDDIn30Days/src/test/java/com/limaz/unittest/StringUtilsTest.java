@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.limaz.util.StringUtils;
+import com.limaz.utils.StringUtils;
 
 public class StringUtilsTest
 {
