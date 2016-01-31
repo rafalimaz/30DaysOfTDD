@@ -4,9 +4,11 @@ import java.util.UUID;
 
 public class OrderService {
 	private IOrderDataService orderDataService;
+	private ICustomerService customerService;
 
-	public OrderService(IOrderDataService orderDataService) {
+	public OrderService(IOrderDataService orderDataService, ICustomerService customerService) {
 		this.orderDataService = orderDataService;
+		this.customerService = customerService;
 	}
 
 	public UUID placeOrder(UUID customerId, IShoppingCart shoppingCart) throws InvalidOrderException {
@@ -16,6 +18,7 @@ public class OrderService {
 			}
 		}
 		
+		Customer customer = customerService.getCustomer(customerId);
 		Order order = new Order();
 		return save(order);
 	}
