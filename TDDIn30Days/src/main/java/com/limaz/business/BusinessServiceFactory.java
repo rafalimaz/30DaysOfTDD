@@ -1,10 +1,4 @@
-package com.limaz.business.factory;
-
-import com.limaz.business.provider.DataStoreProvider;
-import com.limaz.business.provider.IDataStoreProvider;
-import com.limaz.business.provider.ILoggingProvider;
-import com.limaz.business.provider.LoggingProvider;
-import com.limaz.business.service.BusinessService;
+package com.limaz.business;
 
 public class BusinessServiceFactory
  {

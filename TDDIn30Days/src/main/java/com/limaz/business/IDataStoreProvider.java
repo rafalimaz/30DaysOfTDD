@@ -1,4 +1,4 @@
-package com.limaz.business.provider;
+package com.limaz.business;
 
 public interface IDataStoreProvider {
 

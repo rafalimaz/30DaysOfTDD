@@ -1,11 +1,11 @@
-package com.limaz.unittest;
+package com.limaz.stringutils.unittest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.limaz.utils.StringUtils;
+import com.limaz.stringutils.StringUtils;
 
 public class StringUtilsTest
 {
