@@ -1,47 +1,34 @@
 package com.limaz.unittest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.limaz.utils.StringUtils;
 
 public class StringUtilsTest
 {
+	private StringUtils stringUtils;
+	
+	@Before
+	public void setupStringUtils() {
+		stringUtils = new StringUtils();
+	}
+	
     @Test
-    public void shouldBeAbleToCountNumberOfLettersInSimpleSentence()
-    {
-        String sentenceToScan = "TDD is awesome!";
-        String characterToScanFor = "e";
-        int expectedResult = 2;
-        StringUtils stringUtils = new StringUtils();
-
-        int result = stringUtils.FindNumberOfOccurences(sentenceToScan, characterToScanFor);
-
-        assertEquals(expectedResult, result);
+    public void shouldBeAbleToCountNumberOfLettersInSimpleSentence() {
+        assertEquals(2, stringUtils.FindNumberOfOccurences("TDD is awesome!", "e"));
     }
     
     @Test
-    public void shouldBeAbleToCountNumberOfLettersInAComplexSentence()
-    {
-        String sentenceToScan = "Once is unique, twice is a coincidence, three times is a pattern.";
-        String characterToScanFor = "n";
-        int expectedResult = 5;
-        StringUtils stringUtils = new StringUtils();
-
-        int result = stringUtils.FindNumberOfOccurences(sentenceToScan, characterToScanFor);
-
-        assertEquals(expectedResult, result);
+    public void shouldBeAbleToCountNumberOfLettersInAComplexSentence() {
+        assertEquals(5, stringUtils.FindNumberOfOccurences("Once is unique, twice is a coincidence, three times is a pattern.", "n"));
     }
     
     
     @Test (expected = IllegalArgumentException.class)
-    public void shouldGetAnArgumentExceptionWhenCharacterToScanForIsLargerThanOneCharacter()
-    {
-    	String sentenceToScan = "This test should throw an exception";
-    	String characterToScanFor = "xx";
-    	
-        StringUtils stringUtils = new StringUtils();        
-        stringUtils.FindNumberOfOccurences(sentenceToScan, characterToScanFor);
+    public void shouldGetAnArgumentExceptionWhenCharacterToScanForIsLargerThanOneCharacter() {
+    	stringUtils.FindNumberOfOccurences("This test should throw an exception", "xx");
     }
 }
