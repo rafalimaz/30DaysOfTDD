@@ -1,6 +1,7 @@
 package com.limaz.tddstore.unittest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class TddStoreTests {
 		Mockito.verify(orderDataService, Mockito.times(1)).save(Mockito.any(Order.class));
 	}
 	
-	@Test (expected = InvalidOrderException.class)	
+	@Test
 	public void whenAUserAttemptsToOrderAnItemWithAQuantityOfZeroThrowInvalidOrderException() throws Exception{
 		ShoppingCart shoppingCart = new ShoppingCart();
 		ShoppingCartItem shoppingCartItem = new ShoppingCartItem(UUID.randomUUID(), 0);
@@ -55,8 +56,14 @@ public class TddStoreTests {
 		UUID expectedOrderId = UUID.randomUUID();
 				
 		Mockito.stub(orderDataService.save(Mockito.any(Order.class))).toReturn(expectedOrderId);
+		try {
+		    orderService.placeOrder(customerId, shoppingCart);
+		} catch (InvalidOrderException e) {
+			Mockito.verify(orderDataService, Mockito.times(0)).save(Mockito.any(Order.class));
+			return;			
+		}
 		
-		orderService.placeOrder(customerId, shoppingCart);		
+		fail();	
 	}
 }
 
