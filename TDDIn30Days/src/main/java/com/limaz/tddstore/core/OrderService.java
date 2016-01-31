@@ -9,10 +9,15 @@ public class OrderService {
 		this.orderDataService = orderDataService;
 	}
 
-	public UUID placeOrder(UUID customerId, IShoppingCart shoppingCart) {
+	public UUID placeOrder(UUID customerId, IShoppingCart shoppingCart) throws InvalidOrderException {
+		for (ShoppingCartItem item : shoppingCart.getItems()) {
+			if (item.quantity == 0) {
+				throw new InvalidOrderException();
+			}
+		}
+		
 		Order order = new Order();
-		UUID orderId = save(order);
-		return orderId;
+		return save(order);
 	}
 
 	private UUID save(Order order) {
