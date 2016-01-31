@@ -1,10 +1,10 @@
-package com.limaz.unittests;
+package com.limaz.unittest;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.limaz.utils.StringUtils;
+import com.limaz.util.StringUtils;
 
 public class StringUtilsTest
 {

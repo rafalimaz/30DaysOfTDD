@@ -1,4 +1,4 @@
-package com.limaz.utils;
+package com.limaz.util;
 
 public class StringUtils {
 
