@@ -22,7 +22,7 @@ public class StringUtilsTest
     }
     
     @Test
-    public void ShouldBeAbleToCountNumberOfLettersInAComplexSentence()
+    public void shouldBeAbleToCountNumberOfLettersInAComplexSentence()
     {
         String sentenceToScan = "Once is unique, twice is a coincidence, three times is a pattern.";
         String characterToScanFor = "n";
@@ -32,5 +32,16 @@ public class StringUtilsTest
         int result = stringUtils.FindNumberOfOccurences(sentenceToScan, characterToScanFor);
 
         assertEquals(expectedResult, result);
+    }
+    
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void shouldGetAnArgumentExceptionWhenCharacterToScanForIsLargerThanOneCharacter()
+    {
+    	String sentenceToScan = "This test should throw an exception";
+    	String characterToScanFor = "xx";
+    	
+        StringUtils stringUtils = new StringUtils();        
+        stringUtils.FindNumberOfOccurences(sentenceToScan, characterToScanFor);
     }
 }
