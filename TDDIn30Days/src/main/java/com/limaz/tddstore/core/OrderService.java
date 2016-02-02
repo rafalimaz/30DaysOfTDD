@@ -48,15 +48,14 @@ public class OrderService {
 	}
 
 	private Map<UUID, Integer> checkInventoryLevels(UUID orderFullfillmentSessionId, IShoppingCart shoppingCart) {
-		UUID firstItemId = shoppingCart.getItems().get(0).itemId;
-		int firstItemQuantity = shoppingCart.getItems().get(0).quantity;
-		
-		//Check Inventory Level
-		boolean itemsIsInInventory = orderFullFillmentService.isInInventory(orderFullfillmentSessionId, firstItemId, firstItemQuantity);
-		
-		//Place Order
 		Map<UUID, Integer> items = new HashMap<UUID, Integer>();
-		items.put(firstItemId, firstItemQuantity);
+		for (ShoppingCartItem shoppingCartItem : shoppingCart.getItems()) {
+			UUID itemId = shoppingCartItem.itemId;
+			int itemQuantity = shoppingCartItem.quantity;
+			
+			boolean itemsIsInInventory = orderFullFillmentService.isInInventory(orderFullfillmentSessionId, itemId, itemQuantity);
+			items.put(itemId, itemQuantity);
+		}
 		return items;
 	}
 
