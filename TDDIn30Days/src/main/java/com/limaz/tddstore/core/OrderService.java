@@ -43,6 +43,11 @@ public class OrderService {
 	}
 
 	private void placeOrderWithFullfillmentService(UUID orderFullfillmentSessionId, IShoppingCart shoppingCart, Customer customer) {
+		Map<UUID, Integer> items = checkInventoryLevels(orderFullfillmentSessionId, shoppingCart);
+		boolean orderPlaced =  orderFullFillmentService.placeOrder(orderFullfillmentSessionId, items, customer.firstName);
+	}
+
+	private Map<UUID, Integer> checkInventoryLevels(UUID orderFullfillmentSessionId, IShoppingCart shoppingCart) {
 		UUID firstItemId = shoppingCart.getItems().get(0).itemId;
 		int firstItemQuantity = shoppingCart.getItems().get(0).quantity;
 		
@@ -52,7 +57,7 @@ public class OrderService {
 		//Place Order
 		Map<UUID, Integer> items = new HashMap<UUID, Integer>();
 		items.put(firstItemId, firstItemQuantity);
-		boolean orderPlaced =  orderFullFillmentService.placeOrder(orderFullfillmentSessionId, items, customer.firstName);
+		return items;
 	}
 
 	private void closeOrderFullfillmentService(UUID orderFullfillmentSessionId) {
