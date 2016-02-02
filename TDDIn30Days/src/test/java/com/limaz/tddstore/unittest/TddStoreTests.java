@@ -90,7 +90,8 @@ public class TddStoreTests {
 	}
 	
 	@Test
-	public void whenUserPlacesOrderWithItemThatIsInInventoryOrderFulfillmentWorkflowShouldComplete() throws InvalidOrderException {		
+	public void whenUserPlacesOrderWithItemThatIsInInventoryOrderFulfillmentWorkflowShouldComplete() throws InvalidOrderException {
+		//Arrange
 		ShoppingCart shoppingCart = new ShoppingCart();
 		UUID itemId = UUID.randomUUID();
 		ShoppingCartItem shoppingCartItem = new ShoppingCartItem(itemId, 1);
@@ -111,8 +112,10 @@ public class TddStoreTests {
 		//To make work with void method closeSession just do nothing
 		Mockito.doNothing().when(orderFullfillmentService).closeSession(orderFullfillmentSesssionID);
 		
+		//Act
 		orderService.placeOrder(customerId, shoppingCart);
 		
+		//Assert
 		InOrder inOrder = Mockito.inOrder(orderFullfillmentService);
 		inOrder.verify(orderFullfillmentService).openSession(Mockito.any(String.class), Mockito.any(String.class));
 		inOrder.verify(orderFullfillmentService).isInInventory(orderFullfillmentSesssionID, itemId, 1);

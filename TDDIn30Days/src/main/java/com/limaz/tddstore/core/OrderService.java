@@ -24,10 +24,17 @@ public class OrderService {
 			}
 		}
 		
+		placeOrderWithFullfillmentService(customerId, shoppingCart);
+		
+		Order order = new Order();
+		return save(order);
+	}
+
+	private void placeOrderWithFullfillmentService(UUID customerId, IShoppingCart shoppingCart) {
 		Customer customer = customerService.getCustomer(customerId);
 		//customerService has no implementation
 		customer = new Customer(customerId, "Foo", "Bar");
-		UUID orderFullfillmentSessionId = orderFullFillmentService.openSession(USERNAME, PASSWORD);
+		UUID orderFullfillmentSessionId = openOrderFullfillmentService();
 		UUID firstItemId = shoppingCart.getItems().get(0).itemId;
 		int firstItemQuantity = shoppingCart.getItems().get(0).quantity;
 		
@@ -39,11 +46,15 @@ public class OrderService {
 		items.put(firstItemId, firstItemQuantity);
 		boolean orderPlaced =  orderFullFillmentService.placeOrder(orderFullfillmentSessionId, items, customer.firstName);
 		
-		//Close Session
+		closeOrderFullfillmentService(orderFullfillmentSessionId);
+	}
+
+	private void closeOrderFullfillmentService(UUID orderFullfillmentSessionId) {
 		orderFullFillmentService.closeSession(orderFullfillmentSessionId);
-		
-		Order order = new Order();
-		return save(order);
+	}
+
+	private UUID openOrderFullfillmentService() {
+		return orderFullFillmentService.openSession(USERNAME, PASSWORD);
 	}
 
 	private UUID save(Order order) {
