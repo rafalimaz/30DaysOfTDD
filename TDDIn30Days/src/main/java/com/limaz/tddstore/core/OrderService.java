@@ -24,6 +24,7 @@ public class OrderService {
 			}
 		}
 		
+		
 		placeOrderWithFullfillmentService(customerId, shoppingCart);
 		
 		Order order = new Order();
@@ -35,6 +36,13 @@ public class OrderService {
 		//customerService has no implementation
 		customer = new Customer(customerId, "Foo", "Bar");
 		UUID orderFullfillmentSessionId = openOrderFullfillmentService();
+		
+		placeOrderWithFullfillmentService(orderFullfillmentSessionId, shoppingCart, customer);
+		
+		closeOrderFullfillmentService(orderFullfillmentSessionId);
+	}
+
+	private void placeOrderWithFullfillmentService(UUID orderFullfillmentSessionId, IShoppingCart shoppingCart, Customer customer) {
 		UUID firstItemId = shoppingCart.getItems().get(0).itemId;
 		int firstItemQuantity = shoppingCart.getItems().get(0).quantity;
 		
@@ -45,8 +53,6 @@ public class OrderService {
 		Map<UUID, Integer> items = new HashMap<UUID, Integer>();
 		items.put(firstItemId, firstItemQuantity);
 		boolean orderPlaced =  orderFullFillmentService.placeOrder(orderFullfillmentSessionId, items, customer.firstName);
-		
-		closeOrderFullfillmentService(orderFullfillmentSessionId);
 	}
 
 	private void closeOrderFullfillmentService(UUID orderFullfillmentSessionId) {
