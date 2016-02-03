@@ -32,7 +32,7 @@ Repository to commit code related to 30DaysOfTDD tutorial
   - Liskov Substitution Principle
   - Interface Segregation Principle
   - Dependency Inversion Principle
-  - 
+
 ### [Day 6 – What Is Dependency Injection?](http://www.telerik.com/blogs/30-days-of-tdd-day-six-what-is-dependency-injection)
 - Decoupling component with DI
 
