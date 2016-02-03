@@ -1,9 +1,12 @@
-package com.limaz.futuremocking;
+package com.limaz.futuremocking.unittests;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import com.limaz.futuremocking.DependencyClass;
+import com.limaz.futuremocking.DependentClass;
 
 public class FutureMockingTests {
 	@Test
